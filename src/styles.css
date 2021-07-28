@@ -1,0 +1,150 @@
+.poster {
+    position: relative;
+    height: 220px;
+    width: 150px;
+}
+
+.card {
+    display: flex;
+    position: absolute;
+    max-width: 40%;
+    height: auto;
+}
+
+.card > img {
+    margin: 10px;
+    margin-right: 18px;
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    display: block;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 85vh;
+    max-height: 85vh;
+    max-width: 42%;
+    overflow: auto;
+    grid-gap: 5px;
+    justify-content: flex-start;
+}
+
+.grid-item {
+    height: auto;
+    width: 150px;
+    background-color: grey;
+    justify-content: center;
+    display: block;
+    margin: auto;
+    position:relative;
+    transition: all 0.5s;
+    border-radius: 5px;
+}
+
+.grid-item:hover {
+    background-color: red;
+}
+
+.grid-item > h1 {
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+}
+
+.more-info {
+    display: block;
+    float: left;
+}
+
+.form-inline {
+    width: 500px;
+    height: 25px;
+    margin: 15px;
+}
+
+.container-margins {
+    display: flex;
+    padding-left: 50px;
+    margin: 30px;
+    height: 100%;
+}
+
+.rating {
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    z-index: 1;
+    right: 0px;
+    width: 40px;
+    height: 25px;
+    border-radius: 0 0 0px 10px;
+    color: white;
+    background-color:rgba(0, 0, 0, 0.5);
+}
+
+/*sidebar*/
+.queue {
+    padding-left:25px;
+    width: 25%;
+    max-height: 100vh;
+    height: 100vh;
+    float: left;
+    filter: drop-shadow(-11px 0px 18px #000000);
+    background-color: white;
+    position: sticky;
+    float: left;
+}
+
+.queue > .queue-list {
+    overflow: auto;
+    height: 70%;
+}
+
+.queue > h1 {
+    position: flex;
+}
+
+.list-item {
+    position: relative;
+    display: flex;
+    justify-content: left;
+    margin: 20px;
+}
+
+.list-item > img {
+    display: block;
+    max-width: 15%;
+    max-height: 15%;
+    min-width: 15%;
+    min-height: 15%;
+    width: auto;
+    height: auto;
+}
+
+.list-item > .list-item-info {
+    margin: 0px 10px;
+    text-align: left-align;
+    vertical-align: middle;
+}
+
+.remove-button {
+    padding: 0;
+    border: none;
+    background: none;
+    float: right;
+    justify-content: space-between;
+    transition: all 0.5s;
+    margin-left: auto;
+}
+
+.remove-button:hover {
+    opacity: 50%;
+}
+
+.carousel {
+    width: 25%;
+    height: auto;
+    justify-content: center;
+}
