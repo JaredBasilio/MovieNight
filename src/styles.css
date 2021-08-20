@@ -22,25 +22,28 @@
 
 .grid-container {
     display: flex;
+    grid-template-columns: auto auto auto auto;
     flex-wrap: wrap;
+    align-items: flex-end;
+    align-content: flex-start;
     height: 85vh;
     max-height: 85vh;
     max-width: 42%;
     overflow: auto;
     grid-gap: 5px;
-    justify-content: flex-start;
 }
 
 .grid-item {
     height: auto;
     width: 150px;
+    align-self: flex-end;
     background-color: grey;
     justify-content: center;
     display: block;
-    margin: auto;
-    position:relative;
+    margin: 0px 0px auto 0px;
+    position: relative;
     transition: all 0.5s;
-    border-radius: 5px;
+    border-radius: 7px;
 }
 
 .grid-item:hover {
@@ -53,15 +56,21 @@
     padding: 5px;
 }
 
-.more-info {
+.more-info-active {
     display: block;
     float: left;
+    visibility: visible;
+}
+
+.more-info-inactive {
+    visibility: hidden;
 }
 
 .form-inline {
     width: 500px;
     height: 25px;
-    margin: 15px;
+    padding: 7px;
+    margin: 10px;
 }
 
 .container-margins {
@@ -91,7 +100,7 @@
     max-height: 100vh;
     height: 100vh;
     float: left;
-    filter: drop-shadow(-11px 0px 18px #000000);
+    box-shadow: 0 0 0 1pt grey;
     background-color: white;
     position: sticky;
     float: left;
@@ -144,7 +153,67 @@
 }
 
 .carousel {
-    width: 25%;
     height: auto;
     justify-content: center;
+}
+
+.wheel-item {
+    float: left;
+    width: 150px;
+    height: auto;
+    color: white;
+    text-align: center;
+}
+
+.wheel {
+    padding: 10px 9px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.wheel-wrapper {
+    width: 1950px;
+}
+
+.dark-button {
+    background-color: black; /* Green */
+    display: flex;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 15px;
+    transition: all 0.5s;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.dark-button-disabled {
+    background-color: grey; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 15px;
+    transition: all 0.5s;
+    pointer-events: none;
+    border-radius: 10px;
+}
+
+.dark-button:hover {
+    background-color: grey;
+}
+
+.main-page {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
 }

@@ -1,0 +1,62 @@
+.main {
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+    height: 85%;
+}
+
+.options {
+    text-align: left;
+    position: relative;
+}
+
+.options > li {
+    list-style-type: none;
+    margin:25px;
+    padding: 15px;
+    border: none;
+    border-radius: 5pt;
+    box-shadow: 0 0 0 1pt black;
+    transition: all 0.5s;
+}
+
+.options > li:hover {
+    background-color: #cbcbe0;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+.progress {
+	background-color: #d8d8d8;
+	border-radius: 10px;
+	position: relative;
+	margin: 15px 0;
+	height: 40px;
+}
+
+.progress-done {
+	background-color: #cbcbe0;
+	border-radius: 10px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	height: 100%;
+	width: 0;
+	opacity: 0;
+	transition: 1s ease 0.3s;
+}
+
+.movieName {
+    border-radius: 10px;
+	position: absolute;
+	height: 100%;
+    margin: auto;
+    left: 15px;
+    z-index: 1;
+    vertical-align: middle;
+}

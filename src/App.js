@@ -7,7 +7,7 @@ import Movie from './Movie';
 import MovieDescription from './MovieDescription';
 import './styles.css';
 import { Scrollbars } from "react-custom-scrollbars"
-import Popup from './components/Popup';
+import Poll from './components/Poll'
 import Queue from './Queue';
 import update from 'react-addons-update';
 import { Route, BrowserRouter as Router , Link, Switch} from 'react-router-dom'
@@ -21,11 +21,14 @@ const App = (lobbyID) => {
   const [searchValue, setSearchValue] = useState('')
   const [currMovie, setCurrMovie] = useState('')
   const [movieInfo, setMovieInfo] = useState('')
+  const [moreInfo, setMoreInfo] = useState('more-info-inactive');
+  const [availablePick, setAvailablePick] = useState('dark-button-disabled');
   const [queuedMovies, setQueuedMovies] = useState([]);
   const room = lobbyID.lobbyID;
   const [joinedRoom, setJoinedRoom]= useState(false);
   
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [pollModalIsOpen, setPollModalOpen] = useState(false);
+  const [randomModalIsOpen, setRandomModalOpen] = useState(false);
   
   if (!joinedRoom) {
     socket.emit('join_room',room);
@@ -48,6 +51,7 @@ const App = (lobbyID) => {
 
   socket.off('new movie').on('new movie', (movie) => {
     setQueuedMovies(queuedMovies => [...queuedMovies, movie]);
+    setAvailablePick('dark-button');
   });
 
   socket.off('remove movie').on('remove movie', (movie) => {
@@ -87,28 +91,48 @@ const App = (lobbyID) => {
 
   useEffect(() => {
     displayMovie(currMovie);
+    if (currMovie != '') {
+      setMoreInfo('more-info-active');
+    }
   }, [currMovie])
 
-/*   useEffect(() => {
-    queuedMovies.map((movie) => enqueue(movie));
-  }, [queuedMovies]) */
-
   /**
-   * TODO
-   * -Give option for randomizer or poll
-   * -allow cross computer polling
-   * -create login page with socket.io
-   * -add label for current lobby
-   */
+     * TODO
+     * -Give option for randomizer or poll
+     * -allow cross computer polling
+     * -create login page with socket.io
+     * -add label for current lobby
+     * -add the option to request a reroll, otherwise deny
+     *  -add option for user alias and added by on queue
+  */
+
   return (
     <>
       <body>
           <div id="sidebar" className="queue">
             <h1>Entries</h1>
-            <button>Create Poll</button>
-            <button onClick={() => setModalIsOpen(true)}>Choose Random</button>
-            <Modal isOpen={modalIsOpen} 
-                  onRequestClose={() => setModalIsOpen(false)}
+            <button onClick={() => setPollModalOpen(true)} className={availablePick}>Create Poll</button>
+            <button onClick={() => setRandomModalOpen(true)} className={availablePick}>Choose Random</button>{' '}
+            <Modal isOpen={pollModalIsOpen} 
+                  onRequestClose={() => setPollModalOpen(false)}
+                  shouldCloseOnOverlayClick={false}
+                  style={
+                    {
+                      overlay: {
+                        backgroundColor: 'grey',
+                        zIndex: 2
+                      },
+                    }
+                  }>
+              <Poll 
+                props = {queuedMovies}
+                members = {5}
+                />
+              <button className="dark-button" onClick={() => setPollModalOpen(false)}>Close</button>
+              <button className="dark-button" onClick={() => setPollModalOpen(false)}>Reroll</button> 
+            </Modal>
+            <Modal isOpen={randomModalIsOpen} 
+                  onRequestClose={() => setRandomModalOpen(false)}
                   shouldCloseOnOverlayClick={false}
                   style={
                     {
@@ -119,7 +143,8 @@ const App = (lobbyID) => {
                     }
                   }>
               <Roulette props = {queuedMovies}/>
-              <button onClick={() => setModalIsOpen(false)}>Close</button>
+              <button className="dark-button" onClick={() => setRandomModalOpen(false)}>Close</button>
+              <button className="dark-button" onClick={() => setRandomModalOpen(false)}>Reroll</button> 
             </Modal>
             <h3>User: {socket.id != undefined ? socket.id.substring(0,5) : "none"}</h3>
             <h3>Lobby Code: {room}</h3>
@@ -142,7 +167,7 @@ const App = (lobbyID) => {
                         chooseMovie = {chooseMovie}
                         />
                 </div>
-                <div className="more-info">
+                <div className={moreInfo}>
                   <MovieDescription 
                     props = {movieInfo}
                     enqueue = {enqueue}

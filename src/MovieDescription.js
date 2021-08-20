@@ -1,5 +1,6 @@
 import React from 'react';
 import "./styles.css";
+import {Button} from 'react-bootstrap';
 
 const IMG_API = 'https://image.tmdb.org/t/p/w500/' //w500 means the size of the image
 
@@ -38,7 +39,7 @@ const MovieDescription = (props) => {
                     <h1>{name(props.props)}</h1>
                     <p>{dateToSeason(props.props.release_date)}</p>
                     <p>{props.props.overview}</p>
-                    <button onClick={() => props.enqueue(props.props)}>Add to Queue</button>
+                    <button onClick={() => props.enqueue(props.props)} className="dark-button">Add to Queue</button>
                 </div>
             </div>
         </>
